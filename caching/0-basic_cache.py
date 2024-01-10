@@ -2,14 +2,18 @@
 
 """Create a class BasicCache that inherits from BaseCaching"""
 
-
-class BaseCaching:
-    def __init__(self):
-        self.cache_data = {}
+BaseCaching = __import__('base_caching').BaseCaching
 
 class BasicCache(BaseCaching):
+
     def put(self, key, item):
-        self.cache_data[key] = item
+        if key is None or item is None:
+            pass
+        else:
+            self.cache_data[key] = item
 
     def get(self, key):
-        return self.cache_data.get(key, None)
+        if key is not None and key in self.cache_data:
+            return self.cache_data.get(key)
+        else:
+            pass
