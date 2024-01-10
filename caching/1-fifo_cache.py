@@ -24,7 +24,7 @@ class FIFOCache(BaseCaching):
                     del self.cache_data[oldest_key]
                 self.cache_list.append(key)
             self.cache_data[key] = item
-    
+
     def get(self, key):
         """return the value linked to key"""
         if key is not None and key in self.cache_data:
