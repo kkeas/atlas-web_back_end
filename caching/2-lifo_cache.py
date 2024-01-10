@@ -6,14 +6,16 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 
 class LIFOCache(BaseCaching):
+    """Last In First Out Caching System"""
 
     def __init__(self):
-        """initialize FIFOCache"""
+        """initialize LIFOCache"""
         super().__init__()
         """initialize parent class"""
         self.cache_list = []
 
     def put(self, key, item):
+        """put function to remove last key """
         if key is not None and item is not None:
             if key in self.cache_data:
                 self.cache_list.remove(key)
