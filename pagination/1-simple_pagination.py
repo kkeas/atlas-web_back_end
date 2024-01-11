@@ -28,7 +28,6 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-
         pass
 
 
@@ -39,23 +38,13 @@ def index_range(page, page_size):
     return start_index, end_index
 
 
-def get_page(page=1, page_size=10):
+def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
     """assert values are greater than 0, read csv file,
     ensure the start and end are within bounds of dataset,
     extract page of dataset based on indices"""
 
-    assert page > 0
-    assert page_size > 0
+    assert isinstance(page, int) and page > 0
+    assert isinstance(page_size, int) and page_size > 0
     start_index, end_index = index_range(page, page_size)
-
-    with open(Server.DATA_FILE, 'r') as file:
-        reader = csv.reader(file)
-        header = next(reader)
-        data = list(reader)
-
-    start_index = max(0, start_index)
-    end_index = min(len(data), end_index)
-
-    page_data = data[start_index:end_index]
-
-    return header, page_data
+    page_data = self.dataset()[start_index:end_index]
+    return page_data
