@@ -28,7 +28,9 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-            pass
+
+        pass
+
 
 def index_range(page, page_size):
     """function returns a tuple for pagination parameters"""
@@ -38,6 +40,9 @@ def index_range(page, page_size):
 
 
 def get_page(page=1, page_size=10):
+    """assert values are greater than 0, read csv file,
+    ensure the start and end are within bounds of dataset,
+    extract page of dataset based on indices"""
 
     assert page > 0
     assert page_size > 0
