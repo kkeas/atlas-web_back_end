@@ -7,6 +7,7 @@ import csv
 import math
 from typing import List
 
+
 def index_range(page, page_size):
     """function returns a tuple for pagination parameters"""
     start_index = (page - 1) * page_size
@@ -32,7 +33,6 @@ class Server:
             self.__dataset = dataset[1:]
 
         return self.__dataset
-
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """assert values are greater than 0, read csv file,
