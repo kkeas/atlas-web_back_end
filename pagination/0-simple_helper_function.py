@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 """simple helper function index_range that takes
 two integer args page and page size"""
