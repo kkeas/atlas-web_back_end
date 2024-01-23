@@ -3,6 +3,7 @@
 """ a function that returns a log message"""
 
 import re
+import os
 from typing import List
 import logging
 
@@ -40,3 +41,15 @@ class RedactingFormatter(logging.Formatter):
         OG_message = filter_datum(self.fields, self.REDACTION,
                                   super().format(record), self.SEPARATOR)
         return OG_message
+
+    def get_logger() -> logging.Logger:
+        """creates logger object and configures it with a custom formatter"""
+
+        new_logger: logging.Logger = logging.getLogger('user_data')
+        new_logger.setLevel(logging.INFO)
+        new_logger.propogate = False
+        handler: logging.StreamHandler = logging.StreamHandler()
+        handler.setFormatter(RedactingFormatter(PII_FIELDS))
+        new_logger.addHandler(handler)
+        
+        return new_logger
