@@ -51,5 +51,5 @@ class RedactingFormatter(logging.Formatter):
         handler: logging.StreamHandler = logging.StreamHandler()
         handler.setFormatter(RedactingFormatter(PII_FIELDS))
         new_logger.addHandler(handler)
-        
+
         return new_logger
