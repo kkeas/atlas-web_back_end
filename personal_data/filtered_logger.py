@@ -43,7 +43,7 @@ class RedactingFormatter(logging.Formatter):
         return OG_message
 
 
-    PII_FIELDS: tuple = ("name", "email", "phone", "ssn", "password")
+PII_FIELDS: tuple = ("name", "email", "phone", "ssn", "password")
 
 def get_logger() -> logging.Logger:
     """creates logger object and configures it with a custom formatter"""
