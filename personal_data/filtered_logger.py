@@ -72,3 +72,25 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
         user=user, password=password, host=host, database=db
     )
     return connector
+
+
+def main():
+    """obtains database connection and retrieves all rows in the users table"""
+    db_connector = get_db()
+    cursor = db_connector.cursor()
+    logger = get_logger()
+
+    cursor.execute("SELECT * FROM users;")
+    field_names = [column[0] for column in cursor.description]
+    for row in cursor.fetchall():
+        user_dict = dict(zip(field_names, row))
+        user_str = RedactingFormatter.SEPARATOR.join(
+            f"{key}={value}" for key, value in user_dict.items()
+        )
+        logger.info(user_str)
+
+    db_connector.close()
+
+
+if __name__ == '__main__':
+    main()
