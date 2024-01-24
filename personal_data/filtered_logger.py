@@ -6,6 +6,7 @@ import re
 import os
 from typing import List
 import logging
+import mysql.connector
 
 
 def filter_datum(fields: List[str],
@@ -57,3 +58,16 @@ def get_logger() -> logging.Logger:
     new_logger.addHandler(handler)
 
     return new_logger
+
+def get_db() -> mysql.connector.connection.MySQLConnection :
+    """a function that returns a connector to the database"""
+
+    user = os.getenv(PERSONAL_DATA_DB_USERNAME, "root")
+    password = os.getenv(PERSONAL_DATA_DB_PASSWORD, "")
+    host = os.getenv(PERSONAL_DATA_DB_HOST, "localhost")
+    db = os.getenv(PERSONAL_DATA_DB_NAME)
+
+    connector = mysql.connector.connect(
+        user=user, password=password, host=host, database=db
+    )
+    return connector
