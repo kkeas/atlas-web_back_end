@@ -11,7 +11,18 @@ class Auth:
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """public method to require authorization"""
-        return False
+
+        if path is None:
+            return True
+
+        if path is None or excluded_paths is None or len(excluded_paths) == 0:
+            return True
+
+        for p in excluded_paths:
+            standardized_p = p.rstrip('/')
+            if standardized_p in path or p.startswith(path):
+                return False
+        return True
 
     def authorization_header(self, request=None) -> str:
         """returns auth header"""
