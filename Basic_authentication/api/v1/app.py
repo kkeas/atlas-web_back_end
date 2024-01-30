@@ -22,6 +22,7 @@ if os.environ.get('AUTH_TYPE') == 'auth':
 
 @app.before_request
 def before_request():
+    """filter each request"""
     if auth is None:
         return
 
