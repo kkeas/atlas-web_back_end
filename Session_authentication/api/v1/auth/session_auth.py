@@ -1,5 +1,7 @@
 #!/usr/bin/env Python3
 
+"""session authorization class"""
+
 from api.v1.auth.auth import Auth
 
 
