@@ -33,13 +33,14 @@ def before_request():
             '/api/v1/unauthorized/',
             '/api/v1/forbidden/'
     ]
-    
+
     if auth.require_auth(request.path, excluded_paths):
         request.current_user = auth.current_user(request)
-        if auth.authorization_header(request)is None:
+        if auth.authorization_header(request) is None:
             return abort(401)
         if auth.current_user(request) is None:
             abort(403)
+
 
 @app.errorhandler(404)
 def not_found(error) -> str:
