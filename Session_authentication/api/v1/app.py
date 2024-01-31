@@ -42,14 +42,13 @@ def before_request():
     if not auth.require_auth(request.path, excluded_paths):
         return
 
-    if auth.authorization_header(request) and \
-            auth.session_cookie(request) is None:
-        return abort(401)
-    if auth.current_user(request) is None:
+    if auth.authorization_header(request) is None:
         return abort(403)
-
+    if auth.session_cookie(request) is None:
+        return abort(401)
     request.current_user = auth.current_user(request)
-
+    if auth.current_user(request) is None:
+        return abort(401)
 
 @app.errorhandler(404)
 def not_found(error) -> str:
