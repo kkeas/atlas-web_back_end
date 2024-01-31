@@ -26,7 +26,7 @@ class SessionAuth(Auth):
         return session_id
 
     def user_id_for_session_id(self, session_id: str = None) -> str:
-        """Method for retrieving a User ID by session ID"""
+        """ returns a cookie value from a request """
         if session_id is None or not isinstance(session_id, str):
             return None
 
