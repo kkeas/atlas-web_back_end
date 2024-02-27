@@ -1,26 +1,29 @@
-// test payment.js
-const chai = require('chai');
+// Task 4 - Test cases
+
 const sinon = require('sinon');
+const expect = require('chai').expect;
 const sendPaymentRequestToApi = require('./4-payment');
 const Utils = require('./utils');
 
-const expect = chai.expect;
+describe('sendPaymentRequestToApi with stub', () => {
+  it('should call Utils.calculateNumber with correct arguments and log the correct message', () => {
+    // Stubbing Utils.calculateNumber to always return 10
+    const stub = sinon.stub(Utils, 'calculateNumber').returns(10);
 
-describe('sendPaymentRequestToApi', function () {
-  it('should call Utils.calculateNumber with SUM type and log the result', function () {
-    const calculateNumberSpy = sinon.spy(Utils, 'calculateNumber');
-    const consoleLogSpy = sinon.spy(console, 'log');
+    // Spying on console.log
+    const logSpy = sinon.spy(console, 'log');
 
     sendPaymentRequestToApi(100, 20);
 
-    // make sure it was called correctly
-    expect(calculateNumberSpy.calledWith('SUM', 100, 20)).to.be.true;
+    // Verifying that the stub is called with the expected arguments
+    expect(stub.calledOnce).to.be.true;
+    expect(stub.calledWith('SUM', 100, 20)).to.be.true;
 
-    // make sure return was logged to the console
-    expect(consoleLogSpy.calledWith('The total is: 10')).to.be.true;
+    // Verifying that console.log is logging the correct message
+    expect(logSpy.calledWith('The total is: 10')).to.be.true;
 
-    // Restore to prevent side effects
-    calculateNumberSpy.restore();
-    consoleLogSpy.restore();
+    // Restoring the stub and spy
+    stub.restore();
+    logSpy.restore();
   });
 });
