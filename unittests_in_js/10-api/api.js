@@ -1,4 +1,4 @@
-// change port to 3000 from 7865
+// api
 const express = require('express');
 const app = express();
 app.use(express.json());
@@ -25,6 +25,6 @@ app.post('/login', function (req, res) {
     res.send(`Welcome ${userName}`);
 });
 
-app.listen(3000, () => {
-    console.log('API available on localhost port 3000')
+app.listen(7865, () => {
+    console.log('API available on localhost port 7865')
 });
